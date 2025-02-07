@@ -50,7 +50,7 @@ int main(){
     vidurkis = suma/pKiekis;
     
     //sorting
-
+//a
     float temp;
     for(int i = 0; i < pKiekis - 1; i++){
         for(int j = 0; j < pKiekis - 1; j++){
