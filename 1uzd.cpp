@@ -21,12 +21,12 @@ int main(){
     std::cin >> studentas.pavarde;
 
     std::cout << "Iveskite pazymiu kieki" << std::endl;
-    int pKiekis;
-    std::cin >> pKiekis;
+    int x;
+    std::cin >> x;
 
     std::cout << "Iveskite pazymius: " << std::endl;
 
-    for(int i = 0; i < pKiekis; i++){
+    for(int i = 0; i < x; i++){
         int pazymys = 0;
         std::cout << "Pazymys " << i + 1 << ". ";
         std::cin >> pazymys;
@@ -43,17 +43,17 @@ int main(){
 
     //vidurkis
 
-    for(int i = 0; i < pKiekis; i++){
+    for(int i = 0; i < x; i++){
         suma += studentas.pazymiai[i];
     }
 
-    vidurkis = suma/pKiekis;
+    vidurkis = suma/x;
     
     //sorting
 
     float temp;
-    for(int i = 0; i < pKiekis - 1; i++){
-        for(int j = 0; j < pKiekis - 1; j++){
+    for(int i = 0; i < x - 1; i++){
+        for(int j = 0; j < x - 1; j++){
             if(studentas.pazymiai[j] > studentas.pazymiai[j + 1]){
                 temp = studentas.pazymiai[j];
                 studentas.pazymiai[j] = studentas.pazymiai[j + 1];
@@ -62,15 +62,41 @@ int main(){
         }
     }
 
+    //mediana
+
+    float mediana = 0;
+
+    if(x % 2 == 0){
+        mediana = (studentas.pazymiai[x/2 - 1] + studentas.pazymiai[x/2])/2;
+    }
+    else{
+        mediana = studentas.pazymiai[(x+1)/2 - 1];
+    }
+
     //galutinis
 
     galutinisV = vidurkis*0.4 + studentas.egzaminoRezultatas*0.6;
+    galutinisM = mediana*0.4 + studentas.egzaminoRezultatas*0.6;
 
     //lentele
+    char pasirinkimas;
+    std::cout << "Ar norite skaiciuoti galutini ivertinima naudojant pazymiu vidurki ar mediana(v/m)?" << std::endl;
+    std::cin >> pasirinkimas;
 
-    std::cout << "Pavarde" << "   " << "Vardas" << "   " << "Galutinis(vid.)" << std::endl;
-    std::cout << "-------------------------------------" << std::endl;
-    std::cout << studentas.pavarde << "   " << studentas.vardas << "   " << galutinisV << std::endl;
-    
+    while(pasirinkimas != 'm' && pasirinkimas != 'v'){
+        std::cout << "Ivedete bloga simboli, iveskite is naujo: " << std::endl;
+        std::cin >> pasirinkimas;
+    }
+
+    if(pasirinkimas == 'v'){
+        std::cout << "Pavarde" << "   " << "Vardas" << "   " << "Galutinis(vid.)" << std::endl;
+        std::cout << "-------------------------------------" << std::endl;
+        std::cout << studentas.pavarde << "   " << studentas.vardas << "   " << galutinisV << std::endl;
+    }
+    else{
+        std::cout << "Pavarde" << "   " << "Vardas" << "   " << "Galutinis(med.)" << std::endl;
+        std::cout << "-------------------------------------" << std::endl;
+        std::cout << studentas.pavarde << "   " << studentas.vardas << "   " << galutinisM << std::endl;
+    }
     return 0;
 }
