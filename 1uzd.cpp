@@ -21,12 +21,12 @@ int main(){
     std::cin >> studentas.pavarde;
 
     std::cout << "Iveskite pazymiu kieki" << std::endl;
-    int x;
-    std::cin >> x;
+    int pKiekis;
+    std::cin >> pKiekis;
 
     std::cout << "Iveskite pazymius: " << std::endl;
 
-    for(int i = 0; i < x; i++){
+    for(int i = 0; i < pKiekis; i++){
         int pazymys = 0;
         std::cout << "Pazymys " << i + 1 << ". ";
         std::cin >> pazymys;
@@ -43,17 +43,17 @@ int main(){
 
     //vidurkis
 
-    for(int i = 0; i < x; i++){
+    for(int i = 0; i < pKiekis; i++){
         suma += studentas.pazymiai[i];
     }
 
-    vidurkis = suma/x;
+    vidurkis = suma/pKiekis;
     
     //sorting
 
     float temp;
-    for(int i = 0; i < x - 1; i++){
-        for(int j = 0; j < x - 1; j++){
+    for(int i = 0; i < pKiekis - 1; i++){
+        for(int j = 0; j < pKiekis - 1; j++){
             if(studentas.pazymiai[j] > studentas.pazymiai[j + 1]){
                 temp = studentas.pazymiai[j];
                 studentas.pazymiai[j] = studentas.pazymiai[j + 1];
@@ -66,11 +66,11 @@ int main(){
 
     float mediana = 0;
 
-    if(x % 2 == 0){
-        mediana = (studentas.pazymiai[x/2 - 1] + studentas.pazymiai[x/2])/2;
+    if(pKiekis % 2 == 0){
+        mediana = (studentas.pazymiai[pKiekis/2 - 1] + studentas.pazymiai[pKiekis/2])/2;
     }
     else{
-        mediana = studentas.pazymiai[(x+1)/2 - 1];
+        mediana = studentas.pazymiai[(pKiekis+1)/2 - 1];
     }
 
     //galutinis
