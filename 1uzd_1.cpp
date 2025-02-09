@@ -17,6 +17,10 @@ struct studentas{
 int main() {
 
     studentas studentas;
+
+    
+
+
     std::cout << "Iveskite studento varda: " << std::endl;
     std::cin >> studentas.vardas;
     std::cout << "Iveskite studento pavarde: " << std::endl;
