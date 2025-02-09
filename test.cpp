@@ -5,6 +5,7 @@
 #include <cstdlib>
 #include "func.h"
 
+
 struct studentas{
     std::vector<float>pazymiai;
     std::string vardas;
@@ -78,16 +79,7 @@ int main(){
                 std::cin >> pasirinkimas;
             }
             
-            if(pasirinkimas == 'v'){
-                std::cout << "Pavarde" << "   " << "Vardas" << "   " << "Galutinis(vid.)" << std::endl;
-                std::cout << "-------------------------------------" << std::endl;
-                std::cout << studentas.pavarde << "   " << studentas.vardas << "   " << galutinisV << std::endl;
-            }
-            else{
-                std::cout << "Pavarde" << "   " << "Vardas" << "   " << "Galutinis(med.)" << std::endl;
-                std::cout << "-------------------------------------" << std::endl;
-                std::cout << studentas.pavarde << "   " << studentas.vardas << "   " << galutinisM << std::endl;
-            }
+            spausdinimas(pasirinkimas, studentas.pavarde, studentas.vardas, galutinisV, galutinisM);
 
         }
         else if(meniu == 2){
@@ -129,20 +121,44 @@ int main(){
                 std::cin >> pasirinkimas;
             }
             
-            if(pasirinkimas == 'v'){
-                std::cout << "Pavarde" << "   " << "Vardas" << "   " << "Galutinis(vid.)" << std::endl;
-                std::cout << "-------------------------------------" << std::endl;
-                std::cout << studentas.pavarde << "   " << studentas.vardas << "   " << galutinisV << std::endl;
-            }
-            else{
-                std::cout << "Pavarde" << "   " << "Vardas" << "   " << "Galutinis(med.)" << std::endl;
-                std::cout << "-------------------------------------" << std::endl;
-                std::cout << studentas.pavarde << "   " << studentas.vardas << "   " << galutinisM << std::endl;
-            }
+            spausdinimas(pasirinkimas, studentas.pavarde, studentas.vardas, galutinisV, galutinisM);
 
         }
         else if(meniu == 3){
-            std::cout << "nebaigta funkcija" << std::endl;
+            srand(time(0));
+            int x = rand()%vardai.size();
+
+            studentas.pavarde = pavardes[x];
+            studentas.vardas = vardai[x];
+
+            std::cout << "Iveskite pazymiu kieki" << std::endl;
+            std::cin >> studentas.pKiekis;
+
+            for(int i = 0; i < studentas.pKiekis; i++){
+                float randomPazymys = rand()%11;
+                studentas.pazymiai.push_back(randomPazymys);
+            }
+    
+            studentas.egzaminoRezultatas = rand()%11;
+
+            vidurkis = skaiciuotiVid(studentas.pKiekis, suma, studentas.pazymiai);
+            rikiavimas(studentas.pKiekis, studentas.pazymiai);
+            mediana = skaiciuotiMed(studentas.pKiekis, studentas.pazymiai);
+
+            galutinisV = vidurkis*0.4 + studentas.egzaminoRezultatas*0.6;
+            galutinisM = mediana*0.4 + studentas.egzaminoRezultatas*0.6;
+
+            char pasirinkimas;
+            std::cout << "Ar norite skaiciuoti galutini ivertinima naudojant pazymiu vidurki ar mediana(v/m)?" << std::endl;
+            std::cin >> pasirinkimas;
+
+            while(pasirinkimas != 'm' && pasirinkimas != 'v'){
+                std::cout << "Ivedete bloga simboli, iveskite is naujo: " << std::endl;
+                std::cin >> pasirinkimas;
+            }
+            
+            spausdinimas(pasirinkimas, studentas.pavarde, studentas.vardas, galutinisV, galutinisM);
+
         }
         else{
             break;
