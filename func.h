@@ -39,16 +39,3 @@ float skaiciuotiMed(int pKiekis, std::vector<float>&pazymiai){
         return mediana = pazymiai[(pKiekis+1)/2 - 1];
     }
 }
-
-void spausdinimas(char pasirinkimas, std::string pavarde, std::string vardas, float galutinisV, float galutinisM){
-    if(pasirinkimas == 'v'){
-        std::cout << "Pavarde" << "   " << "Vardas" << "   " << "Galutinis(vid.)" << std::endl;
-        std::cout << "-------------------------------------" << std::endl;
-        std::cout << pavarde << "   " << vardas << "   " << std::fixed << std::setprecision(2) << galutinisV << std::endl;
-    }
-    else{
-        std::cout << "Pavarde" << "   " << "Vardas" << "   " << "Galutinis(med.)" << std::endl;
-        std::cout << "-------------------------------------" << std::endl;
-        std::cout << pavarde << "   " << vardas << "   " << std::fixed << std::setprecision(2) << galutinisM << std::endl;
-    }
-}

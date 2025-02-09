@@ -11,6 +11,9 @@ struct studentas{
     std::string pavarde;
     float egzaminoRezultatas;
     int pKiekis;
+    char pasirinkimas;
+    float galutinisV;
+    float galutinisM;
 };
 
 int main(){
@@ -21,8 +24,6 @@ int main(){
 
     std::vector<studentas> grupe;
 
-    float galutinisV;
-    float galutinisM;
     float vidurkis;
     float suma = 0;
     int meniu;
@@ -71,19 +72,18 @@ int main(){
             rikiavimas(studentas.pKiekis, studentas.pazymiai);
             mediana = skaiciuotiMed(studentas.pKiekis, studentas.pazymiai);
 
-            galutinisV = vidurkis*0.4 + studentas.egzaminoRezultatas*0.6;
-            galutinisM = mediana*0.4 + studentas.egzaminoRezultatas*0.6;
+            studentas.galutinisV = vidurkis*0.4 + studentas.egzaminoRezultatas*0.6;
+            studentas.galutinisM = mediana*0.4 + studentas.egzaminoRezultatas*0.6;
 
-            char pasirinkimas;
             std::cout << "Ar norite skaiciuoti galutini ivertinima naudojant pazymiu vidurki ar mediana(v/m)?" << std::endl;
-            std::cin >> pasirinkimas;
+            std::cin >> studentas.pasirinkimas;
 
-            while(pasirinkimas != 'm' && pasirinkimas != 'v'){
+            while(studentas.pasirinkimas != 'm' && studentas.pasirinkimas != 'v'){
                 std::cout << "Ivedete bloga simboli, iveskite is naujo: " << std::endl;
-                std::cin >> pasirinkimas;
+                std::cin >> studentas.pasirinkimas;
             }
-            
-            spausdinimas(pasirinkimas, studentas.pavarde, studentas.vardas, galutinisV, galutinisM);
+
+            grupe.push_back(studentas);
 
         }
         else if(meniu == 2){
@@ -111,8 +111,8 @@ int main(){
             rikiavimas(studentas.pKiekis, studentas.pazymiai);
             mediana = skaiciuotiMed(studentas.pKiekis, studentas.pazymiai);
 
-            galutinisV = vidurkis*0.4 + studentas.egzaminoRezultatas*0.6;
-            galutinisM = mediana*0.4 + studentas.egzaminoRezultatas*0.6;
+            studentas.galutinisV = vidurkis*0.4 + studentas.egzaminoRezultatas*0.6;
+            studentas.galutinisM = mediana*0.4 + studentas.egzaminoRezultatas*0.6;
 
             char pasirinkimas;
             std::cout << "Ar norite skaiciuoti galutini ivertinima naudojant pazymiu vidurki ar mediana(v/m)?" << std::endl;
@@ -122,8 +122,8 @@ int main(){
                 std::cout << "Ivedete bloga simboli, iveskite is naujo: " << std::endl;
                 std::cin >> pasirinkimas;
             }
-            
-            spausdinimas(pasirinkimas, studentas.pavarde, studentas.vardas, galutinisV, galutinisM);
+            studentas.pasirinkimas = pasirinkimas;
+            grupe.push_back(studentas);
 
         }
         else if(meniu == 3){
@@ -146,8 +146,8 @@ int main(){
             rikiavimas(studentas.pKiekis, studentas.pazymiai);
             mediana = skaiciuotiMed(studentas.pKiekis, studentas.pazymiai);
 
-            galutinisV = vidurkis*0.4 + studentas.egzaminoRezultatas*0.6;
-            galutinisM = mediana*0.4 + studentas.egzaminoRezultatas*0.6;
+            studentas.galutinisV = vidurkis*0.4 + studentas.egzaminoRezultatas*0.6;
+            studentas.galutinisM = mediana*0.4 + studentas.egzaminoRezultatas*0.6;
 
             char pasirinkimas;
             std::cout << "Ar norite skaiciuoti galutini ivertinima naudojant pazymiu vidurki ar mediana(v/m)?" << std::endl;
@@ -157,21 +157,30 @@ int main(){
                 std::cout << "Ivedete bloga simboli, iveskite is naujo: " << std::endl;
                 std::cin >> pasirinkimas;
             }
-            
-            spausdinimas(pasirinkimas, studentas.pavarde, studentas.vardas, galutinisV, galutinisM);
+            studentas.pasirinkimas = pasirinkimas;
+            grupe.push_back(studentas);
 
         }
         else{
-            
-
-
+            break;
         }
 
-        grupe.push_back(studentas);
+        std::cout << "Pavarde" << "   " << "Vardas" << "   " << "Galutinis(vid.)/Galutinis(med.)" << std::endl;
+        std::cout << "-------------------------------------" << std::endl;
+
+        for(int i = 0; i < grupe.size(); i++){
+                
+            if(grupe[i].pasirinkimas == 'v'){
+                std::cout << grupe[i].pavarde << "   " << grupe[i].vardas << "   "<< std::fixed << std::setprecision(2) << grupe[i].galutinisV << std::endl;
+
+            }
+            else{
+                std::cout << grupe[i].pavarde << "   " << grupe[i].vardas << "   "  << std::fixed << std::setprecision(2) << grupe[i].galutinisM << std::endl;
+            }
+        }
 
         std::cout << "Pasirinkite kita veiksma (1-4): " << std::endl;
         std::cin >> meniu;
-
 
     }
 
