@@ -1,6 +1,6 @@
-float skaiciuotiVid(float pKiekis, float suma, std::vector<float>&pazymiai){
+float skaiciuotiVid(int pKiekis, std::vector<float>&pazymiai){
     float vidurkis;
-    suma = 0;
+    float suma = 0;
     for(int i = 0; i < pKiekis; i++){
         suma += pazymiai[i];
     }
@@ -44,11 +44,11 @@ void spausdinimas(char pasirinkimas, std::string pavarde, std::string vardas, fl
     if(pasirinkimas == 'v'){
         std::cout << "Pavarde" << "   " << "Vardas" << "   " << "Galutinis(vid.)" << std::endl;
         std::cout << "-------------------------------------" << std::endl;
-        std::cout << pavarde << "   " << vardas << "   " << galutinisV << std::endl;
+        std::cout << pavarde << "   " << vardas << "   " << std::fixed << std::setprecision(2) << galutinisV << std::endl;
     }
     else{
         std::cout << "Pavarde" << "   " << "Vardas" << "   " << "Galutinis(med.)" << std::endl;
         std::cout << "-------------------------------------" << std::endl;
-        std::cout << pavarde << "   " << vardas << "   " << galutinisM << std::endl;
+        std::cout << pavarde << "   " << vardas << "   " << std::fixed << std::setprecision(2) << galutinisM << std::endl;
     }
 }

@@ -5,7 +5,6 @@
 #include <cstdlib>
 #include "func.h"
 
-
 struct studentas{
     std::vector<float>pazymiai;
     std::string vardas;
@@ -16,18 +15,20 @@ struct studentas{
 
 int main(){
 
-    std::vector<std::string>vardai = {"Jonas", "Paulius", "Matas", "Tomas", "Tautvydas", "Vardenis"};
-    std::vector<std::string>pavardes = {"Jonavicius", "Pauliavicius", "Matavicius", "Tomavicius", "Tautvydavicius", "Pavardenis"};
+    srand(time(0));
+    std::vector<std::string>vardai = {"Jonas", "Paulius", "Matas", "Tomas", "Vardenis"};
+    std::vector<std::string>pavardes = {"Jonavicius", "Pauliavicius", "Matavicius", "Tomavicius", "Pavardenis"};
+
+    std::vector<studentas> grupe;
 
     float galutinisV;
     float galutinisM;
     float vidurkis;
     float suma = 0;
-    studentas studentas;
     int meniu;
     float mediana;
     
-    std::cout << "Pasirinkite generavimo buda: 1 - ranka, 2 - generuoti pazymius, 3 - generuoti pazymius, studentu vardus, pavardes - 3, baigti darba - 4." << std::endl;
+    std::cout << "\nPasirinkite generavimo buda:\n 1 - ranka\n 2 - generuoti pazymius\n 3 - generuoti pazymius studentu vardus, pavardes\n 4 - baigti darba" << std::endl;
     std::cin >> meniu;
 
     while(meniu < 1 || meniu > 4){
@@ -36,6 +37,9 @@ int main(){
     }
 
     while(meniu == 1 || meniu == 2 || meniu == 3 || meniu == 4){
+
+        studentas studentas;
+        studentas.pazymiai.clear();
 
         if(meniu == 1){
             std::cout << "Iveskite studento varda: " << std::endl;
@@ -63,7 +67,7 @@ int main(){
             std::cout << "Iveskite egzamino pazymi: " << std::endl;
             std::cin >> studentas.egzaminoRezultatas;
 
-            vidurkis = skaiciuotiVid(studentas.pKiekis, suma, studentas.pazymiai);
+            vidurkis = skaiciuotiVid(studentas.pKiekis, studentas.pazymiai);
             rikiavimas(studentas.pKiekis, studentas.pazymiai);
             mediana = skaiciuotiMed(studentas.pKiekis, studentas.pazymiai);
 
@@ -96,8 +100,6 @@ int main(){
                 std::cin >> studentas.pKiekis;
             }
 
-            srand(time(0));
-
             for(int i = 0; i < studentas.pKiekis; i++){
                 float randomPazymys = rand()%11;
                 studentas.pazymiai.push_back(randomPazymys);
@@ -105,7 +107,7 @@ int main(){
     
             studentas.egzaminoRezultatas = rand()%11;
 
-            vidurkis = skaiciuotiVid(studentas.pKiekis, suma, studentas.pazymiai);
+            vidurkis = skaiciuotiVid(studentas.pKiekis, studentas.pazymiai);
             rikiavimas(studentas.pKiekis, studentas.pazymiai);
             mediana = skaiciuotiMed(studentas.pKiekis, studentas.pazymiai);
 
@@ -125,7 +127,6 @@ int main(){
 
         }
         else if(meniu == 3){
-            srand(time(0));
             int x = rand()%vardai.size();
 
             studentas.pavarde = pavardes[x];
@@ -141,7 +142,7 @@ int main(){
     
             studentas.egzaminoRezultatas = rand()%11;
 
-            vidurkis = skaiciuotiVid(studentas.pKiekis, suma, studentas.pazymiai);
+            vidurkis = skaiciuotiVid(studentas.pKiekis, studentas.pazymiai);
             rikiavimas(studentas.pKiekis, studentas.pazymiai);
             mediana = skaiciuotiMed(studentas.pKiekis, studentas.pazymiai);
 
@@ -161,13 +162,19 @@ int main(){
 
         }
         else{
-            break;
+            
+
+
         }
+
+        grupe.push_back(studentas);
 
         std::cout << "Pasirinkite kita veiksma (1-4): " << std::endl;
         std::cin >> meniu;
 
+
     }
+
 
     return 0;
 }
