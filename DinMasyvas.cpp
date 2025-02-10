@@ -22,13 +22,23 @@ int main(){
     std::string vardai[] = {"Vardenis", "Vardenis_1", "Vardenis_2", "Vardenis_3", "Vardenis_4"};
     std::string pavardes[] = {"Pavardenis", "Pavardenis_1", "Pavardenis_2", "Pavardenis_3", "Pavardenis_4"};
     int vardaiSize = sizeof(vardai) / sizeof(vardai[0]);
-    const int maxStudentu = 100;
-    studentas* grupe = new studentas[maxStudentu];
+ 
+    int studentuMaxKiekis;
+    std::cout << "Iveskite maksimalu studentu kieki: " << std::endl;
+    std::cin >> studentuMaxKiekis;
+
+    while(studentuMaxKiekis <=0){
+        std::cout << "Studentu kiekis turi buti teigiamas, veskite is naujo: " << std::endl;
+        std::cin >> studentuMaxKiekis;
+    }
+
+    studentas* grupe = new studentas[studentuMaxKiekis];
+
     int studentuCount = 0;
     float vidurkis;
     float mediana;
     int meniu;
-    
+
     std::cout << "\nPasirinkite generavimo buda:\n 1 - ranka\n 2 - generuoti pazymius\n 3 - generuoti pazymius studentu vardus, pavardes\n 4 - baigti darba" << std::endl;
     std::cin >> meniu;
 
@@ -38,6 +48,11 @@ int main(){
     }
     
     while(meniu == 1 || meniu == 2 || meniu == 3 || meniu == 4){
+
+        if(studentuCount == studentuMaxKiekis){
+            std::cout << "Pasiektas maksimalus studentu skaicius." << std::endl;
+            break;
+        }
 
         studentas studentas;
         studentas.pazymiai = nullptr;
