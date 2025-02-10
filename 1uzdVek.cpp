@@ -165,25 +165,29 @@ int main(){
             break;
         }
 
-        std::cout << "Pavarde" << "   " << "Vardas" << "   " << "Galutinis(vid.)/Galutinis(med.)" << std::endl;
+        std::cout << "Pavarde" << std::setw(15) << "Vardas" << std::setw(15) << "Galutinis(vid.)/Galutinis(med.)" << std::endl;
         std::cout << "-------------------------------------" << std::endl;
 
         for(int i = 0; i < grupe.size(); i++){
                 
             if(grupe[i].pasirinkimas == 'v'){
-                std::cout << grupe[i].pavarde << "   " << grupe[i].vardas << "   "<< std::fixed << std::setprecision(2) << grupe[i].galutinisV << std::endl;
+                std::cout << grupe[i].pavarde << std::setw(15) << grupe[i].vardas << std::setw(15) << std::fixed << std::setprecision(2) << grupe[i].galutinisV << std::endl;
 
             }
             else{
-                std::cout << grupe[i].pavarde << "   " << grupe[i].vardas << "   "  << std::fixed << std::setprecision(2) << grupe[i].galutinisM << std::endl;
+                std::cout << grupe[i].pavarde << std::setw(15) << grupe[i].vardas << std::setw(15)  << std::fixed << std::setprecision(2) << grupe[i].galutinisM << std::endl;
             }
         }
 
         std::cout << "Pasirinkite kita veiksma (1-4): " << std::endl;
         std::cin >> meniu;
 
-    }
+        while(meniu < 1 || meniu > 4){
+            std::cout << "Ivedete neteisinga skaiciu, veskite is naujo: " << std::endl;
+            std::cin >> meniu;
+        }
 
+    }
 
     return 0;
 }

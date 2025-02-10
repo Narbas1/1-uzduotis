@@ -17,9 +17,10 @@ struct studentas {
 };
 
 int main(){
+    
     srand(time(0));
-    std::string vardai[] = {"Jonas", "Paulius", "Matas", "Tomas", "Vardenis"};
-    std::string pavardes[] = {"Jonavicius", "Pauliavicius", "Matavicius", "Tomavicius", "Pavardenis"};
+    std::string vardai[] = {"Vardenis", "Vardenis_1", "Vardenis_2", "Vardenis_3", "Vardenis_4"};
+    std::string pavardes[] = {"Pavardenis", "Pavardenis_1", "Pavardenis_2", "Pavardenis_3", "Pavardenis_4"};
     int vardaiSize = sizeof(vardai) / sizeof(vardai[0]);
     const int maxStudentu = 100;
     studentas* grupe = new studentas[maxStudentu];
@@ -30,6 +31,7 @@ int main(){
     
     std::cout << "\nPasirinkite generavimo buda:\n 1 - ranka\n 2 - generuoti pazymius\n 3 - generuoti pazymius studentu vardus, pavardes\n 4 - baigti darba" << std::endl;
     std::cin >> meniu;
+
     while(meniu < 1 || meniu > 4){
         std::cout << "Ivedete neteisinga skaiciu, veskite is naujo: " << std::endl;
         std::cin >> meniu;
@@ -183,21 +185,26 @@ int main(){
             break;
         }
 
-        std::cout << "Pavarde" << "   " << "Vardas" << "   " << "Galutinis(vid.)/Galutinis(med.)" << std::endl;
+        std::cout << "Pavarde" << std::setw(15) << "Vardas" << std::setw(15) << "Galutinis(vid.)/Galutinis(med.)" << std::endl;
         std::cout << "-------------------------------------" << std::endl;
 
         for (int i = 0; i < studentuCount; i++){
 
             if(grupe[i].pasirinkimas == 'v'){
-                std::cout << grupe[i].pavarde << "   " << grupe[i].vardas << "   " << std::fixed << std::setprecision(2) << grupe[i].galutinisV << std::endl;
+                std::cout << grupe[i].pavarde << std::setw(15) << grupe[i].vardas << std::setw(15) << std::fixed << std::setprecision(2) << grupe[i].galutinisV << std::endl;
             }
             else{
-                std::cout << grupe[i].pavarde << "   " << grupe[i].vardas << "   " << std::fixed << std::setprecision(2) << grupe[i].galutinisM << std::endl;
+                std::cout << grupe[i].pavarde << std::setw(15) << grupe[i].vardas << std::setw(15) << std::fixed << std::setprecision(2) << grupe[i].galutinisM << std::endl;
             }
         }
 
         std::cout << "Pasirinkite kita veiksma (1-4): " << std::endl;
         std::cin >> meniu;
+
+        while(meniu < 1 || meniu > 4){
+            std::cout << "Ivedete neteisinga skaiciu, veskite is naujo: " << std::endl;
+            std::cin >> meniu;
+        }
     }
 
     for (int i = 0; i < studentuCount; i++){
