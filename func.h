@@ -14,21 +14,6 @@ float skaiciuotiVid(int pKiekis, std::vector<float>&pazymiai){
     return vidurkis;
 }
 
-void rikiavimas(float pKiekis, std::vector<float>&pazymiai){
-
-    float temp;
-
-    for(int i = 0; i < pKiekis - 1; i++){
-        for(int j = 0; j < pKiekis - 1; j++){
-            if(pazymiai[j] > pazymiai[j + 1]){
-                temp = pazymiai[j];
-                pazymiai[j] = pazymiai[j + 1];
-                pazymiai[j + 1] = temp;
-            }
-        }
-    }
-}
-
 float skaiciuotiMed(int pKiekis, std::vector<float>&pazymiai){
     float mediana;
 

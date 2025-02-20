@@ -4,6 +4,7 @@
 #include <iomanip>
 #include <cstdlib>
 #include "func.h"
+#include <algorithm>
 
 struct studentas{
     std::vector<float>pazymiai;
@@ -11,7 +12,6 @@ struct studentas{
     std::string pavarde;
     float egzaminoRezultatas;
     int pKiekis;
-    char pasirinkimas;
     float galutinisV;
     float galutinisM;
 };
@@ -28,9 +28,18 @@ int main(){
     float suma = 0;
     int meniu;
     float mediana;
-    
+    char pasirinkimas;
+
     std::cout << "\nPasirinkite generavimo buda:\n 1 - ranka\n 2 - generuoti pazymius\n 3 - generuoti pazymius studentu vardus, pavardes\n 4 - baigti darba" << std::endl;
     std::cin >> meniu;
+
+    std::cout << "Ar norite skaiciuoti galutini ivertinima naudojant pazymiu vidurki ar mediana(v/m)?" << std::endl;
+    std::cin >> pasirinkimas;
+
+    while(pasirinkimas != 'm' && pasirinkimas != 'v'){
+        std::cout << "Ivedete bloga simboli, iveskite is naujo: " << std::endl;
+        std::cin >> pasirinkimas;
+    }
 
     while(meniu < 1 || meniu > 4){
         std::cout << "Ivedete neteisinga skaiciu, veskite is naujo: " << std::endl;
@@ -69,19 +78,11 @@ int main(){
             std::cin >> studentas.egzaminoRezultatas;
 
             vidurkis = skaiciuotiVid(studentas.pKiekis, studentas.pazymiai);
-            rikiavimas(studentas.pKiekis, studentas.pazymiai);
+            std::sort(studentas.pazymiai.begin(), studentas.pazymiai.end());
             mediana = skaiciuotiMed(studentas.pKiekis, studentas.pazymiai);
 
             studentas.galutinisV = vidurkis*0.4 + studentas.egzaminoRezultatas*0.6;
             studentas.galutinisM = mediana*0.4 + studentas.egzaminoRezultatas*0.6;
-
-            std::cout << "Ar norite skaiciuoti galutini ivertinima naudojant pazymiu vidurki ar mediana(v/m)?" << std::endl;
-            std::cin >> studentas.pasirinkimas;
-
-            while(studentas.pasirinkimas != 'm' && studentas.pasirinkimas != 'v'){
-                std::cout << "Ivedete bloga simboli, iveskite is naujo: " << std::endl;
-                std::cin >> studentas.pasirinkimas;
-            }
 
             grupe.push_back(studentas);
 
@@ -108,21 +109,12 @@ int main(){
             studentas.egzaminoRezultatas = rand()%11;
 
             vidurkis = skaiciuotiVid(studentas.pKiekis, studentas.pazymiai);
-            rikiavimas(studentas.pKiekis, studentas.pazymiai);
+            std::sort(studentas.pazymiai.begin(), studentas.pazymiai.end());
             mediana = skaiciuotiMed(studentas.pKiekis, studentas.pazymiai);
 
             studentas.galutinisV = vidurkis*0.4 + studentas.egzaminoRezultatas*0.6;
             studentas.galutinisM = mediana*0.4 + studentas.egzaminoRezultatas*0.6;
 
-            char pasirinkimas;
-            std::cout << "Ar norite skaiciuoti galutini ivertinima naudojant pazymiu vidurki ar mediana(v/m)?" << std::endl;
-            std::cin >> pasirinkimas;
-
-            while(pasirinkimas != 'm' && pasirinkimas != 'v'){
-                std::cout << "Ivedete bloga simboli, iveskite is naujo: " << std::endl;
-                std::cin >> pasirinkimas;
-            }
-            studentas.pasirinkimas = pasirinkimas;
             grupe.push_back(studentas);
 
         }
@@ -143,21 +135,12 @@ int main(){
             studentas.egzaminoRezultatas = rand()%11;
 
             vidurkis = skaiciuotiVid(studentas.pKiekis, studentas.pazymiai);
-            rikiavimas(studentas.pKiekis, studentas.pazymiai);
+            std::sort(studentas.pazymiai.begin(), studentas.pazymiai.end());;
             mediana = skaiciuotiMed(studentas.pKiekis, studentas.pazymiai);
 
             studentas.galutinisV = vidurkis*0.4 + studentas.egzaminoRezultatas*0.6;
             studentas.galutinisM = mediana*0.4 + studentas.egzaminoRezultatas*0.6;
 
-            char pasirinkimas;
-            std::cout << "Ar norite skaiciuoti galutini ivertinima naudojant pazymiu vidurki ar mediana(v/m)?" << std::endl;
-            std::cin >> pasirinkimas;
-
-            while(pasirinkimas != 'm' && pasirinkimas != 'v'){
-                std::cout << "Ivedete bloga simboli, iveskite is naujo: " << std::endl;
-                std::cin >> pasirinkimas;
-            }
-            studentas.pasirinkimas = pasirinkimas;
             grupe.push_back(studentas);
 
         }
@@ -165,17 +148,17 @@ int main(){
             break;
         }
 
-        std::cout << "Pavarde" << std::setw(15) << "Vardas" << std::setw(15) << "Galutinis(vid.)/Galutinis(med.)" << std::endl;
-        std::cout << "-------------------------------------" << std::endl;
+        std::cout << "Pavarde" << std::setw(20) << "Vardas" << std::setw(40) << "Galutinis(vid.)/Galutinis(med.)" << std::endl;
+        std::cout << "-------------------------------------------------------------------" << std::endl;
 
         for(int i = 0; i < grupe.size(); i++){
                 
-            if(grupe[i].pasirinkimas == 'v'){
-                std::cout << grupe[i].pavarde << std::setw(15) << grupe[i].vardas << std::setw(15) << std::fixed << std::setprecision(2) << grupe[i].galutinisV << std::endl;
+            if(pasirinkimas == 'v'){
+                std::cout << grupe[i].pavarde << std::setw(17) << grupe[i].vardas << std::setw(15) << std::fixed << std::setprecision(2) << grupe[i].galutinisV << std::endl;
 
             }
             else{
-                std::cout << grupe[i].pavarde << std::setw(15) << grupe[i].vardas << std::setw(15)  << std::fixed << std::setprecision(2) << grupe[i].galutinisM << std::endl;
+                std::cout << grupe[i].pavarde << std::setw(17) << grupe[i].vardas << std::setw(15)  << std::fixed << std::setprecision(2) << grupe[i].galutinisM << std::endl;
             }
         }
 
