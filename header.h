@@ -1,3 +1,12 @@
+#include <iostream>
+#include <vector>
+#include <ctime>
+#include <iomanip>
+#include <cstdlib>
+#include <algorithm>
+#include <fstream>
+#include <string>
+
 float skaiciuotiVid(int pKiekis, std::vector<float>&pazymiai){
     float vidurkis;
     float suma = 0;

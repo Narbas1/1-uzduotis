@@ -1,10 +1,5 @@
-#include <iostream>
-#include <vector>
-#include <ctime>
-#include <iomanip>
-#include <cstdlib>
-#include "func.h"
-#include <algorithm>
+#include "header.h"
+
 
 struct studentas{
     std::vector<float>pazymiai;
@@ -30,8 +25,13 @@ int main(){
     float mediana;
     char pasirinkimas;
 
-    std::cout << "\nPasirinkite generavimo buda:\n 1 - ranka\n 2 - generuoti pazymius\n 3 - generuoti pazymius studentu vardus, pavardes\n 4 - baigti darba" << std::endl;
+    std::cout << "\nPasirinkite generavimo buda:\n 1 - ranka\n 2 - generuoti pazymius\n 3 - generuoti pazymius studentu vardus, pavardes\n 4 - nuskaityti duomenis is failo\n 5 - baigti darba" << std::endl;
     std::cin >> meniu;
+
+    while(meniu < 1 || meniu > 5){
+        std::cout << "Ivedete neteisinga skaiciu, veskite is naujo: " << std::endl;
+        std::cin >> meniu;
+    }
 
     std::cout << "Ar norite skaiciuoti galutini ivertinima naudojant pazymiu vidurki ar mediana(v/m)?" << std::endl;
     std::cin >> pasirinkimas;
@@ -41,12 +41,9 @@ int main(){
         std::cin >> pasirinkimas;
     }
 
-    while(meniu < 1 || meniu > 4){
-        std::cout << "Ivedete neteisinga skaiciu, veskite is naujo: " << std::endl;
-        std::cin >> meniu;
-    }
 
-    while(meniu == 1 || meniu == 2 || meniu == 3 || meniu == 4){
+
+    while(meniu == 1 || meniu == 2 || meniu == 3 || meniu == 4 || meniu == 5){
 
         studentas studentas;
         studentas.pazymiai.clear();
@@ -142,6 +139,11 @@ int main(){
             studentas.galutinisM = mediana*0.4 + studentas.egzaminoRezultatas*0.6;
 
             grupe.push_back(studentas);
+        
+        }
+        else if(meniu == 4){
+
+
 
         }
         else{
