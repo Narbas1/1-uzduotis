@@ -1,16 +1,5 @@
 #include "header.h"
 
-
-struct studentas{
-    std::vector<float>pazymiai;
-    std::string vardas;
-    std::string pavarde;
-    float egzaminoRezultatas;
-    int pKiekis;
-    float galutinisV;
-    float galutinisM;
-};
-
 int main(){
 
     srand(time(0));
@@ -24,6 +13,7 @@ int main(){
     int meniu;
     float mediana;
     char pasirinkimas;
+    char spausBudas;
 
     std::cout << "\nPasirinkite generavimo buda:\n 1 - ranka\n 2 - generuoti pazymius\n 3 - generuoti pazymius studentu vardus, pavardes\n 4 - nuskaityti duomenis is failo\n 5 - baigti darba" << std::endl;
     std::cin >> meniu;
@@ -82,6 +72,7 @@ int main(){
             studentas.galutinisM = mediana*0.4 + studentas.egzaminoRezultatas*0.6;
 
             grupe.push_back(studentas);
+
 
         }
         else if(meniu == 2){
@@ -143,7 +134,7 @@ int main(){
         }
         else if(meniu == 4){
 
-            std::ifstream inFile("kursiokai.txt");
+            std::ifstream inFile("studentai10000.txt");
             if(!inFile.is_open()){
                 std::cout << "Nepavyko atidaryti failo." << std::endl;
                 std::cout << "Pasirinkite kita veiksma: " << std::endl;
@@ -168,7 +159,7 @@ int main(){
                 std::istringstream token(line);
                 
                 token >> studentas.vardas >> studentas.pavarde;
-                float nd = 5;
+                float nd = 15;
 
                 studentas.pKiekis = nd;
                 studentas.pazymiai.resize(nd);
@@ -195,18 +186,32 @@ int main(){
             break;
         }
 
-        std::cout << "Pavarde" << std::setw(20) << "Vardas" << std::setw(40) << "Galutinis(vid.)/Galutinis(med.)" << std::endl;
-        std::cout << "-------------------------------------------------------------------" << std::endl;
 
-        for(int i = 0; i < grupe.size(); i++){
-                
-            if(pasirinkimas == 'v'){
-                std::cout << grupe[i].pavarde << std::setw(17) << grupe[i].vardas << std::setw(15) << std::fixed << std::setprecision(2) << grupe[i].galutinisV << std::endl;
+        std::cout << "Ar norite duomenis matyti terminale ar faile? (t/f)" << std::endl;
+        std::cin >> spausBudas;
 
+        while(spausBudas != 't' && spausBudas != 'f'){
+            std::cout << "Pasirinkote bloga simboli, veskite is naujo: " << std::endl;
+            std::cin >> spausBudas;
+        }
+
+        if(spausBudas == 't'){
+            std::cout << "Pavarde" << std::setw(20) << "Vardas" << std::setw(40) << "Galutinis(vid.)/Galutinis(med.)" << std::endl;
+            std::cout << "-------------------------------------------------------------------" << std::endl;
+    
+            for(int i = 0; i < grupe.size(); i++){
+                    
+                if(pasirinkimas == 'v'){
+                    std::cout << grupe[i].pavarde << std::setw(17) << grupe[i].vardas << std::setw(15) << std::fixed << std::setprecision(2) << grupe[i].galutinisV << std::endl;
+    
+                }
+                else{
+                    std::cout << grupe[i].pavarde << std::setw(17) << grupe[i].vardas << std::setw(15)  << std::fixed << std::setprecision(2) << grupe[i].galutinisM << std::endl;
+                }
             }
-            else{
-                std::cout << grupe[i].pavarde << std::setw(17) << grupe[i].vardas << std::setw(15)  << std::fixed << std::setprecision(2) << grupe[i].galutinisM << std::endl;
-            }
+        }
+        else{
+            spausdinimasFaile(pasirinkimas, grupe);
         }
 
         std::cout << "Pasirinkite kita veiksma (1-4): " << std::endl;
