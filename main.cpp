@@ -143,7 +143,52 @@ int main(){
         }
         else if(meniu == 4){
 
+            std::ifstream inFile("kursiokai.txt");
+            if(!inFile.is_open()){
+                std::cout << "Nepavyko atidaryti failo." << std::endl;
+                std::cout << "Pasirinkite kita veiksma: " << std::endl;
+                std::cin >> meniu;
+                continue;
+            }
 
+            std::string topLine;
+            std::getline(inFile, topLine);
+
+            while(inFile){
+                std::string line;
+
+                if(!std::getline(inFile, line)){
+                    break;
+                }
+                
+                if(line.empty()){
+                    continue;
+                }
+
+                std::istringstream token(line);
+                
+                token >> studentas.vardas >> studentas.pavarde;
+                float nd = 5;
+
+                studentas.pKiekis = nd;
+                studentas.pazymiai.resize(nd);
+
+                for(int i = 0; i < nd; i++){
+                    token >> studentas.pazymiai[i];
+                }
+
+                token >> studentas.egzaminoRezultatas;
+
+                vidurkis = skaiciuotiVid(nd, studentas.pazymiai);
+                std::sort(studentas.pazymiai.begin(), studentas.pazymiai.end());
+                mediana = skaiciuotiMed(nd, studentas.pazymiai);
+
+                studentas.galutinisV = vidurkis * 0.4 + studentas.egzaminoRezultatas * 0.6;
+                studentas.galutinisM = mediana * 0.4 + studentas.egzaminoRezultatas * 0.6;
+
+                grupe.push_back(studentas);
+
+            }
 
         }
         else{

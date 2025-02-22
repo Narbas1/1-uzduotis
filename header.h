@@ -6,6 +6,7 @@
 #include <algorithm>
 #include <fstream>
 #include <string>
+#include <sstream>
 
 float skaiciuotiVid(int pKiekis, std::vector<float>&pazymiai){
     float vidurkis;

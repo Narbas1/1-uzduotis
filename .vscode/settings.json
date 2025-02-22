@@ -58,6 +58,7 @@
         "sstream": "cpp",
         "stop_token": "cpp",
         "thread": "cpp",
-        "algorithm": "cpp"
+        "algorithm": "cpp",
+        "fstream": "cpp"
     }
 }
