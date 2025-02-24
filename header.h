@@ -38,7 +38,7 @@ float skaiciuotiMed(int pKiekis, std::vector<float>&pazymiai){
     }
 }
 
-void spausdinimasFaile(char pasirinkimas, std::vector<studentas> &grupe){
+void spausdinimasFaile(char galutinioBudas, std::vector<studentas> &grupe){
 
     std::ofstream outFile("duomenys.txt");
 
@@ -47,7 +47,7 @@ void spausdinimasFaile(char pasirinkimas, std::vector<studentas> &grupe){
 
     for(int i = 0; i < grupe.size(); i++){
 
-        if(pasirinkimas == 'v'){
+        if(galutinioBudas == 'v'){
 
             outFile << grupe[i].pavarde << std::setw(17) << grupe[i].vardas << std::setw(15) << std::fixed << std::setprecision(2) << grupe[i].galutinisV << std::endl;
 
@@ -60,7 +60,7 @@ void spausdinimasFaile(char pasirinkimas, std::vector<studentas> &grupe){
     outFile.close();
 }
 
-void rusiuotiOutput(std::vector<studentas>& grupe, char rusiavimoBudas, char pasirinkimas){
+void rusiuotiOutput(std::vector<studentas>& grupe, char rusiavimoBudas, char galutinioBudas){
     
     if(rusiavimoBudas == 'p'){
         std::sort(grupe.begin(), grupe.end(), [](const studentas& a, const studentas& b){
@@ -71,13 +71,30 @@ void rusiuotiOutput(std::vector<studentas>& grupe, char rusiavimoBudas, char pas
         });
     }
     else{
-        std::sort(grupe.begin(), grupe.end(), [pasirinkimas](const studentas& a, const studentas& b){
-            if(pasirinkimas == 'v'){
+        std::sort(grupe.begin(), grupe.end(), [galutinioBudas](const studentas& a, const studentas& b){
+            if(galutinioBudas == 'v'){
                 return a.galutinisV > b.galutinisV;
             }
             else{
                 return a.galutinisM > b.galutinisM;
             }
         });
+    }
+}
+
+void spausdinimasTerminale(std::vector<studentas>&grupe, char galutinioBudas){
+
+    std::cout << "Pavarde" << std::setw(20) << "Vardas" << std::setw(40) << "Galutinis(vid.)/Galutinis(med.)" << std::endl;
+    std::cout << "-------------------------------------------------------------------" << std::endl;
+
+    for(int i = 0; i < grupe.size(); i++){
+            
+        if(galutinioBudas == 'v'){
+            std::cout << grupe[i].pavarde << std::setw(17) << grupe[i].vardas << std::setw(15) << std::fixed << std::setprecision(2) << grupe[i].galutinisV << std::endl;
+
+        }
+        else{
+            std::cout << grupe[i].pavarde << std::setw(17) << grupe[i].vardas << std::setw(15)  << std::fixed << std::setprecision(2) << grupe[i].galutinisM << std::endl;
+        }
     }
 }

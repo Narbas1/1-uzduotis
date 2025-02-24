@@ -10,10 +10,9 @@ int main(){
     
     int pKiekis;
     float vidurkis;
-    float suma = 0;
     int meniu;
     float mediana;
-    char pasirinkimas;
+    char galutinioBudas;
     char spausBudas;
     char rusiavimoBudas;
 
@@ -26,11 +25,11 @@ int main(){
     }
 
     std::cout << "Ar norite skaiciuoti galutini ivertinima naudojant pazymiu vidurki ar mediana(v/m)?" << std::endl;
-    std::cin >> pasirinkimas;
+    std::cin >> galutinioBudas;
 
-    while(pasirinkimas != 'm' && pasirinkimas != 'v'){
+    while(galutinioBudas != 'm' && galutinioBudas != 'v'){
         std::cout << "Ivedete bloga simboli, iveskite is naujo: " << std::endl;
-        std::cin >> pasirinkimas;
+        std::cin >> galutinioBudas;
     }
 
     std::cout << "Ar norite duomenis matyti terminale ar faile? (t/f)" << std::endl;
@@ -186,35 +185,26 @@ int main(){
 
         }
         else{
+            std::cout << "Isejote is programos." << std::endl;
             break;
         }
-
-        rusiuotiOutput(grupe, rusiavimoBudas, pasirinkimas);
-
+        
         while(spausBudas != 't' && spausBudas != 'f'){
             std::cout << "Pasirinkote bloga simboli, veskite is naujo: " << std::endl;
             std::cin >> spausBudas;
         }
 
         if(spausBudas == 't'){
-            std::cout << "Pavarde" << std::setw(20) << "Vardas" << std::setw(40) << "Galutinis(vid.)/Galutinis(med.)" << std::endl;
-            std::cout << "-------------------------------------------------------------------" << std::endl;
-    
-            for(int i = 0; i < grupe.size(); i++){
-                    
-                if(pasirinkimas == 'v'){
-                    std::cout << grupe[i].pavarde << std::setw(17) << grupe[i].vardas << std::setw(15) << std::fixed << std::setprecision(2) << grupe[i].galutinisV << std::endl;
-    
-                }
-                else{
-                    std::cout << grupe[i].pavarde << std::setw(17) << grupe[i].vardas << std::setw(15)  << std::fixed << std::setprecision(2) << grupe[i].galutinisM << std::endl;
-                }
-            }
+
+            rusiuotiOutput(grupe, rusiavimoBudas, galutinioBudas);
+
+            spausdinimasTerminale(grupe, galutinioBudas);
+
         }
         else{
 
-            rusiuotiOutput(grupe, rusiavimoBudas, pasirinkimas);
-            spausdinimasFaile(pasirinkimas, grupe);
+            rusiuotiOutput(grupe, rusiavimoBudas, galutinioBudas);
+            spausdinimasFaile(galutinioBudas, grupe);
 
         }
 
