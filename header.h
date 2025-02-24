@@ -8,32 +8,23 @@
 #include <string>
 #include <sstream>
 #include <chrono>
+#include <numeric>
 
 struct studentas {
     std::vector<float> pazymiai;
     std::string vardas;
     std::string pavarde;
     float egzaminoRezultatas;
-    int pKiekis;
     float galutinisV;
     float galutinisM;
 };
 
+float skaiciuotiVid(std::vector<float>&pazymiai){
 
-float skaiciuotiVid(int pKiekis, std::vector<float>&pazymiai){
-    float vidurkis;
-    float suma = 0;
-    for(int i = 0; i < pKiekis; i++){
-        suma += pazymiai[i];
-    }
+    if(pazymiai.empty()) return 0.0f;
+    float sum = std::accumulate(pazymiai.begin(), pazymiai.end(), 0.0f);
+    return sum / pazymiai.size();
 
-    if(suma == 0){
-        vidurkis = 0;
-    }
-    else{
-        vidurkis = suma/pKiekis;
-    }
-    return vidurkis;
 }
 
 float skaiciuotiMed(int pKiekis, std::vector<float>&pazymiai){
@@ -49,14 +40,12 @@ float skaiciuotiMed(int pKiekis, std::vector<float>&pazymiai){
 
 void spausdinimasFaile(char pasirinkimas, std::vector<studentas> &grupe){
 
-    std::cout << grupe.size();
-
     std::ofstream outFile("duomenys.txt");
 
     outFile << "Pavarde" << std::setw(20) << "Vardas" << std::setw(40) << "Galutinis(vid.)/Galutinis(med.)" << std::endl;
     outFile << "-------------------------------------------------------------------" << std::endl;
 
-    for(int i = 0; grupe.size(); i++){
+    for(int i = 0; i < grupe.size(); i++){
 
         if(pasirinkimas == 'v'){
 
@@ -69,4 +58,26 @@ void spausdinimasFaile(char pasirinkimas, std::vector<studentas> &grupe){
         }
     }
     outFile.close();
+}
+
+void rusiuotiOutput(std::vector<studentas>& grupe, char rusiavimoBudas, char pasirinkimas){
+    
+    if(rusiavimoBudas == 'p'){
+        std::sort(grupe.begin(), grupe.end(), [](const studentas& a, const studentas& b){
+            if(a.pavarde == b.pavarde){
+                return a.vardas < b.vardas;
+            }
+            return a.pavarde < b.pavarde;
+        });
+    }
+    else{
+        std::sort(grupe.begin(), grupe.end(), [pasirinkimas](const studentas& a, const studentas& b){
+            if(pasirinkimas == 'v'){
+                return a.galutinisV > b.galutinisV;
+            }
+            else{
+                return a.galutinisM > b.galutinisM;
+            }
+        });
+    }
 }

@@ -7,13 +7,15 @@ int main(){
     std::vector<std::string>pavardes = {"Jonavicius", "Pauliavicius", "Matavicius", "Tomavicius", "Pavardenis"};
 
     std::vector<studentas> grupe;
-
+    
+    int pKiekis;
     float vidurkis;
     float suma = 0;
     int meniu;
     float mediana;
     char pasirinkimas;
     char spausBudas;
+    char rusiavimoBudas;
 
     std::cout << "\nPasirinkite generavimo buda:\n 1 - ranka\n 2 - generuoti pazymius\n 3 - generuoti pazymius studentu vardus, pavardes\n 4 - nuskaityti duomenis is failo\n 5 - baigti darba" << std::endl;
     std::cin >> meniu;
@@ -31,9 +33,24 @@ int main(){
         std::cin >> pasirinkimas;
     }
 
+    std::cout << "Ar norite duomenis matyti terminale ar faile? (t/f)" << std::endl;
+    std::cin >> spausBudas;
+
+    std::cout << "Ar noresite studentus rusiuoti pagal pavarde ar pagal galutini pazymi? (p/g)" << std::endl;
+    std::cin >> rusiavimoBudas;
+
+    if(meniu != 4){
+        std::cout << "Iveskite pazymiu kieki" << std::endl;
+        std::cin >> pKiekis;
+    }
+
+    while(pKiekis <= 0){
+        std::cout << "Pazymiu kiekis negali buti 0 arba neigiamas, iveskite teigiama skaiciu: " << std::endl;
+        std::cin >> pKiekis;
+    }
 
 
-    while(meniu == 1 || meniu == 2 || meniu == 3 || meniu == 4 || meniu == 5){
+    while(meniu >= 1 && meniu <= 5){
 
         studentas studentas;
         studentas.pazymiai.clear();
@@ -43,18 +60,10 @@ int main(){
             std::cin >> studentas.vardas;
             std::cout << "Iveskite studento pavarde: " << std::endl;
             std::cin >> studentas.pavarde;
-        
-            std::cout << "Iveskite pazymiu kieki" << std::endl;
-            std::cin >> studentas.pKiekis;
-
-            while(studentas.pKiekis <= 0){
-                std::cout << "Pazymiu kiekis negali buti 0 arba neigiamas, iveskite teigiama skaiciu: " << std::endl;
-                std::cin >> studentas.pKiekis;
-            }
 
             std::cout << "Iveskite pazymius: " << std::endl;
     
-            for(int i = 0; i < studentas.pKiekis; i++){
+            for(int i = 0; i < pKiekis; i++){
                 int pazymys = 0;
                 std::cout << "Pazymys " << i + 1 << ". ";
                 std::cin >> pazymys;
@@ -64,9 +73,9 @@ int main(){
             std::cout << "Iveskite egzamino pazymi: " << std::endl;
             std::cin >> studentas.egzaminoRezultatas;
 
-            vidurkis = skaiciuotiVid(studentas.pKiekis, studentas.pazymiai);
+            vidurkis = skaiciuotiVid(studentas.pazymiai);
             std::sort(studentas.pazymiai.begin(), studentas.pazymiai.end());
-            mediana = skaiciuotiMed(studentas.pKiekis, studentas.pazymiai);
+            mediana = skaiciuotiMed(pKiekis, studentas.pazymiai);
 
             studentas.galutinisV = vidurkis*0.4 + studentas.egzaminoRezultatas*0.6;
             studentas.galutinisM = mediana*0.4 + studentas.egzaminoRezultatas*0.6;
@@ -80,25 +89,22 @@ int main(){
             std::cin >> studentas.vardas;
             std::cout << "Iveskite studento pavarde: " << std::endl;
             std::cin >> studentas.pavarde;
-        
-            std::cout << "Iveskite pazymiu kieki" << std::endl;
-            std::cin >> studentas.pKiekis;
 
-            while(studentas.pKiekis <= 0){
+            while(studentas.pazymiai.size() <= 0){
                 std::cout << "Pazymiu kiekis negali buti 0 arba neigiamas, iveskite teigiama skaiciu: " << std::endl;
-                std::cin >> studentas.pKiekis;
+                std::cin >> pKiekis;
             }
 
-            for(int i = 0; i < studentas.pKiekis; i++){
+            for(int i = 0; i < pKiekis; i++){
                 float randomPazymys = rand()%11;
                 studentas.pazymiai.push_back(randomPazymys);
             }
     
             studentas.egzaminoRezultatas = rand()%11;
 
-            vidurkis = skaiciuotiVid(studentas.pKiekis, studentas.pazymiai);
+            vidurkis = skaiciuotiVid(studentas.pazymiai);
             std::sort(studentas.pazymiai.begin(), studentas.pazymiai.end());
-            mediana = skaiciuotiMed(studentas.pKiekis, studentas.pazymiai);
+            mediana = skaiciuotiMed(pKiekis, studentas.pazymiai);
 
             studentas.galutinisV = vidurkis*0.4 + studentas.egzaminoRezultatas*0.6;
             studentas.galutinisM = mediana*0.4 + studentas.egzaminoRezultatas*0.6;
@@ -112,19 +118,16 @@ int main(){
             studentas.pavarde = pavardes[x];
             studentas.vardas = vardai[x];
 
-            std::cout << "Iveskite pazymiu kieki" << std::endl;
-            std::cin >> studentas.pKiekis;
-
-            for(int i = 0; i < studentas.pKiekis; i++){
+            for(int i = 0; i < pKiekis; i++){
                 float randomPazymys = rand()%11;
                 studentas.pazymiai.push_back(randomPazymys);
             }
     
             studentas.egzaminoRezultatas = rand()%11;
 
-            vidurkis = skaiciuotiVid(studentas.pKiekis, studentas.pazymiai);
-            std::sort(studentas.pazymiai.begin(), studentas.pazymiai.end());;
-            mediana = skaiciuotiMed(studentas.pKiekis, studentas.pazymiai);
+            vidurkis = skaiciuotiVid(studentas.pazymiai);
+            std::sort(studentas.pazymiai.begin(), studentas.pazymiai.end());
+            mediana = skaiciuotiMed(pKiekis, studentas.pazymiai);
 
             studentas.galutinisV = vidurkis*0.4 + studentas.egzaminoRezultatas*0.6;
             studentas.galutinisM = mediana*0.4 + studentas.egzaminoRezultatas*0.6;
@@ -136,9 +139,11 @@ int main(){
 
             std::ifstream inFile("studentai10000.txt");
             if(!inFile.is_open()){
+
                 std::cout << "Nepavyko atidaryti failo." << std::endl;
                 std::cout << "Pasirinkite kita veiksma: " << std::endl;
                 std::cin >> meniu;
+
                 continue;
             }
 
@@ -151,7 +156,6 @@ int main(){
                 if(!std::getline(inFile, line)){
                     break;
                 }
-                
                 if(line.empty()){
                     continue;
                 }
@@ -159,20 +163,19 @@ int main(){
                 std::istringstream token(line);
                 
                 token >> studentas.vardas >> studentas.pavarde;
-                float nd = 15;
+                pKiekis = 15;
 
-                studentas.pKiekis = nd;
-                studentas.pazymiai.resize(nd);
+                studentas.pazymiai.resize(pKiekis);
 
-                for(int i = 0; i < nd; i++){
+                for(int i = 0; i < pKiekis; i++){
                     token >> studentas.pazymiai[i];
                 }
 
                 token >> studentas.egzaminoRezultatas;
 
-                vidurkis = skaiciuotiVid(nd, studentas.pazymiai);
+                vidurkis = skaiciuotiVid(studentas.pazymiai);
                 std::sort(studentas.pazymiai.begin(), studentas.pazymiai.end());
-                mediana = skaiciuotiMed(nd, studentas.pazymiai);
+                mediana = skaiciuotiMed(pKiekis, studentas.pazymiai);
 
                 studentas.galutinisV = vidurkis * 0.4 + studentas.egzaminoRezultatas * 0.6;
                 studentas.galutinisM = mediana * 0.4 + studentas.egzaminoRezultatas * 0.6;
@@ -186,9 +189,7 @@ int main(){
             break;
         }
 
-
-        std::cout << "Ar norite duomenis matyti terminale ar faile? (t/f)" << std::endl;
-        std::cin >> spausBudas;
+        rusiuotiOutput(grupe, rusiavimoBudas, pasirinkimas);
 
         while(spausBudas != 't' && spausBudas != 'f'){
             std::cout << "Pasirinkote bloga simboli, veskite is naujo: " << std::endl;
@@ -211,10 +212,13 @@ int main(){
             }
         }
         else{
+
+            rusiuotiOutput(grupe, rusiavimoBudas, pasirinkimas);
             spausdinimasFaile(pasirinkimas, grupe);
+
         }
 
-        std::cout << "Pasirinkite kita veiksma (1-4): " << std::endl;
+        std::cout << "Pasirinkite kita veiksma (1-5): " << std::endl;
         std::cin >> meniu;
 
         while(meniu < 1 || meniu > 4){
