@@ -136,7 +136,9 @@ int main(){
         }
         else if(meniu == 4){
 
-            std::ifstream inFile("studentai10000.txt");
+            auto pradzia = std::chrono::steady_clock::now();
+
+            std::ifstream inFile("studentai1000000.txt");
             if(!inFile.is_open()){
 
                 std::cout << "Nepavyko atidaryti failo." << std::endl;
@@ -162,7 +164,7 @@ int main(){
                 std::istringstream token(line);
                 
                 token >> studentas.vardas >> studentas.pavarde;
-                pKiekis = 15;
+                pKiekis = 7;
 
                 studentas.pazymiai.resize(pKiekis);
 
@@ -182,6 +184,10 @@ int main(){
                 grupe.push_back(studentas);
 
             }
+
+            auto pabaiga = std::chrono::steady_clock::now();
+            std::chrono::duration<double> trukme = pabaiga - pradzia;
+            std::cout << "Uztruko " << trukme.count() << " sekundziu." << std::endl;
 
         }
         else{
