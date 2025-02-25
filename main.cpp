@@ -7,16 +7,14 @@ int main(){
     std::vector<std::string>pavardes = {"Jonavicius", "Pauliavicius", "Matavicius", "Tomavicius", "Pavardenis"};
 
     std::vector<studentas> grupe;
-    
-    int pKiekis;
-    float vidurkis;
-    int meniu;
-    float mediana;
-    char galutinioBudas;
-    char spausBudas;
-    char rusiavimoBudas;
 
-    std::cout << "\nPasirinkite generavimo buda:\n 1 - ranka\n 2 - generuoti pazymius\n 3 - generuoti pazymius studentu vardus, pavardes\n 4 - nuskaityti duomenis is failo\n 5 - baigti darba" << std::endl;
+    std::cout << "\nPasirinkite generavimo buda:\n " << 
+                "1 - ranka\n " << 
+                "2 - generuoti pazymius\n " << 
+                "3 - generuoti pazymius studentu vardus, pavardes\n " << 
+                "4 - nuskaityti duomenis is failo\n " << 
+                "5 - baigti darba" << std::endl;
+
     std::cin >> meniu;
 
     while(meniu < 1 || meniu > 5){
@@ -38,10 +36,8 @@ int main(){
     std::cout << "Ar noresite studentus rusiuoti pagal pavarde ar pagal galutini pazymi? (p/g)" << std::endl;
     std::cin >> rusiavimoBudas;
 
-    if(meniu != 4){
-        std::cout << "Iveskite pazymiu kieki" << std::endl;
-        std::cin >> pKiekis;
-    }
+    std::cout << "Iveskite pazymiu kieki" << std::endl;
+    std::cin >> pKiekis;
 
     while(pKiekis <= 0){
         std::cout << "Pazymiu kiekis negali buti 0 arba neigiamas, iveskite teigiama skaiciu: " << std::endl;
@@ -164,7 +160,6 @@ int main(){
                 std::istringstream token(line);
                 
                 token >> studentas.vardas >> studentas.pavarde;
-                pKiekis = 7;
 
                 studentas.pazymiai.resize(pKiekis);
 
@@ -203,7 +198,6 @@ int main(){
         if(spausBudas == 't'){
 
             rusiuotiOutput(grupe, rusiavimoBudas, galutinioBudas);
-
             spausdinimasTerminale(grupe, galutinioBudas);
 
         }

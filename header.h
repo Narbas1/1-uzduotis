@@ -10,6 +10,14 @@
 #include <chrono>
 #include <numeric>
 
+int pKiekis;
+float vidurkis;
+int meniu;
+float mediana;
+char galutinioBudas;
+char spausBudas;
+char rusiavimoBudas;
+
 struct studentas {
     std::vector<float> pazymiai;
     std::string vardas;
@@ -36,28 +44,6 @@ float skaiciuotiMed(int pKiekis, std::vector<float>&pazymiai){
     else{
         return mediana = pazymiai[(pKiekis+1)/2 - 1];
     }
-}
-
-void spausdinimasFaile(char galutinioBudas, std::vector<studentas> &grupe){
-
-    std::ofstream outFile("duomenys.txt");
-
-    outFile << "Pavarde" << std::setw(20) << "Vardas" << std::setw(40) << "Galutinis(vid.)/Galutinis(med.)" << std::endl;
-    outFile << "-------------------------------------------------------------------" << std::endl;
-
-    for(int i = 0; i < grupe.size(); i++){
-
-        if(galutinioBudas == 'v'){
-
-            outFile << grupe[i].pavarde << std::setw(17) << grupe[i].vardas << std::setw(15) << std::fixed << std::setprecision(2) << grupe[i].galutinisV << std::endl;
-
-        } else {
-
-            outFile << grupe[i].pavarde << std::setw(17) << grupe[i].vardas << std::setw(15) << std::fixed << std::setprecision(2) << grupe[i].galutinisM << std::endl;
- 
-        }
-    }
-    outFile.close();
 }
 
 void rusiuotiOutput(std::vector<studentas>& grupe, char rusiavimoBudas, char galutinioBudas){
@@ -97,4 +83,26 @@ void spausdinimasTerminale(std::vector<studentas>&grupe, char galutinioBudas){
             std::cout << grupe[i].pavarde << std::setw(17) << grupe[i].vardas << std::setw(15)  << std::fixed << std::setprecision(2) << grupe[i].galutinisM << std::endl;
         }
     }
+}
+
+void spausdinimasFaile(char galutinioBudas, std::vector<studentas> &grupe){
+
+    std::ofstream outFile("duomenys.txt");
+
+    outFile << "Pavarde" << std::setw(20) << "Vardas" << std::setw(40) << "Galutinis(vid.)/Galutinis(med.)" << std::endl;
+    outFile << "-------------------------------------------------------------------" << std::endl;
+
+    for(int i = 0; i < grupe.size(); i++){
+
+        if(galutinioBudas == 'v'){
+
+            outFile << grupe[i].pavarde << std::setw(17) << grupe[i].vardas << std::setw(15) << std::fixed << std::setprecision(2) << grupe[i].galutinisV << std::endl;
+
+        } else {
+
+            outFile << grupe[i].pavarde << std::setw(17) << grupe[i].vardas << std::setw(15) << std::fixed << std::setprecision(2) << grupe[i].galutinisM << std::endl;
+ 
+        }
+    }
+    outFile.close();
 }
