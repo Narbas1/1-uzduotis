@@ -134,7 +134,7 @@ int main(){
 
             auto pradzia = std::chrono::steady_clock::now();
 
-            std::ifstream inFile("studentai1000000.txt");
+            std::ifstream inFile("studentai10000.txt");
             if(!inFile.is_open()){
 
                 std::cout << "Nepavyko atidaryti failo." << std::endl;

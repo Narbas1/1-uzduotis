@@ -59,6 +59,7 @@
         "stop_token": "cpp",
         "thread": "cpp",
         "algorithm": "cpp",
-        "fstream": "cpp"
+        "fstream": "cpp",
+        "numeric": "cpp"
     }
 }

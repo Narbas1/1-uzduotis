@@ -70,17 +70,19 @@ void rusiuotiOutput(std::vector<studentas>& grupe, char rusiavimoBudas, char gal
 
 void spausdinimasTerminale(std::vector<studentas>&grupe, char galutinioBudas){
 
-    std::cout << "Pavarde" << std::setw(20) << "Vardas" << std::setw(40) << "Galutinis(vid.)/Galutinis(med.)" << std::endl;
+    std::cout << std::setw(15) << "Pavarde" << std::setw(17) << "Vardas" << std::setw(35) << "Galutinis(vid./med.)" << std::endl;
     std::cout << "-------------------------------------------------------------------" << std::endl;
 
     for(int i = 0; i < grupe.size(); i++){
             
         if(galutinioBudas == 'v'){
-            std::cout << grupe[i].pavarde << std::setw(17) << grupe[i].vardas << std::setw(15) << std::fixed << std::setprecision(2) << grupe[i].galutinisV << std::endl;
+            std::cout << std::setw(15) << grupe[i].pavarde << std::setw(17) << grupe[i].vardas 
+            << std::setw(20) << std::fixed << std::setprecision(2) << grupe[i].galutinisV << std::endl;
 
         }
         else{
-            std::cout << grupe[i].pavarde << std::setw(17) << grupe[i].vardas << std::setw(15)  << std::fixed << std::setprecision(2) << grupe[i].galutinisM << std::endl;
+            std::cout << std::setw(15) << grupe[i].pavarde << std::setw(17) << grupe[i].vardas 
+            << std::setw(20)  << std::fixed << std::setprecision(2) << grupe[i].galutinisM << std::endl;
         }
     }
 }
@@ -89,18 +91,20 @@ void spausdinimasFaile(char galutinioBudas, std::vector<studentas> &grupe){
 
     std::ofstream outFile("duomenys.txt");
 
-    outFile << "Pavarde" << std::setw(20) << "Vardas" << std::setw(40) << "Galutinis(vid.)/Galutinis(med.)" << std::endl;
+    outFile << std::setw(10) << "Pavarde" << std::setw(20) << "Vardas" << std::setw(30) << "Galutinis(vid./med.)" << std::endl;
     outFile << "-------------------------------------------------------------------" << std::endl;
 
     for(int i = 0; i < grupe.size(); i++){
 
         if(galutinioBudas == 'v'){
 
-            outFile << grupe[i].pavarde << std::setw(17) << grupe[i].vardas << std::setw(15) << std::fixed << std::setprecision(2) << grupe[i].galutinisV << std::endl;
+            outFile << std::setw(15) << grupe[i].pavarde << std::setw(17) << grupe[i].vardas 
+            << std::setw(30) << std::fixed << std::setprecision(2) << grupe[i].galutinisV << std::endl;
 
         } else {
 
-            outFile << grupe[i].pavarde << std::setw(17) << grupe[i].vardas << std::setw(15) << std::fixed << std::setprecision(2) << grupe[i].galutinisM << std::endl;
+            outFile << std::setw(15) << grupe[i].pavarde << std::setw(17) << grupe[i].vardas 
+            << std::setw(30) << std::fixed << std::setprecision(2) << grupe[i].galutinisM << std::endl;
  
         }
     }
